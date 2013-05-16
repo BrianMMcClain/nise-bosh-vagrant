@@ -1,6 +1,8 @@
 Nise BOSH Vagrant
 =================
 
+NOTE: This is still under development and currently only generates the Vagrantfile, it does not complete the nise-bosh components currently
+
 Nise BOSH Vagrant is a mashup of [nise_bosh](https://github.com/nttlabs/nise_bosh) and [Vagrant](http://www.vagrantup.com/)
 
 

@@ -3,13 +3,14 @@ require 'erb'
 module NiseBOSHVagrant
 	class Initializer
 
-		attr_reader :release_path, :nise_path, :scripts_path, :vagrantfile_path
+		attr_reader :release_path, :nise_path, :scripts_path, :vagrantfile_path, :manifest_file
 
 		def initialize(opts)
 			opts[:nise].nil? ? @nise_path = nil : @nise_path = opts[:nise]
 			@release_path = opts[:release]
 			@vagrantfile_path = File.join(@release_path, "Vagrantfile")
 			@scripts_path = File.join(File.dirname(File.expand_path(__FILE__)), "../../scripts")
+			@manifest_file = opts[:manifest]
 		end
 
 		def generate_vagrantfile(output_path=@vagrantfile_path)

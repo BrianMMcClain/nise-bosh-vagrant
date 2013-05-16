@@ -20,8 +20,12 @@ Usage:
 Options:
 EOS
 
+				opt :manifest, "Path to manifest file", :type => :string
 				opt :nise, "Path to nise-bosh if you don't wish to pull HEAD of master from GitHub", :type => :string
 			end
+
+			Trollop::die :manifest, "must provilde a manifest file" if opts[:manifest].nil?
+			Trollop::die :manifest, "must exist" unless File.exist?(opts[:manifest])
 
 			opts[:release] = ARGV[0]
 

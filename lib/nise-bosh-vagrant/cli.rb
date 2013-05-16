@@ -26,6 +26,7 @@ EOS
 			opts[:release] = ARGV[0]
 
 			init = NiseBOSHVagrant::Initializer.new(opts)
+			init.generate_vagrantfile
 		end
 
 	end

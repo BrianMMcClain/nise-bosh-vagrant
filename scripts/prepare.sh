@@ -4,6 +4,17 @@
 sudo apt-get update
 sudo apt-get install -y git-core
 
+# If not using local nise-bosh, pull it from github
+if [ ! -d "/home/vagrant/nise_bosh" ]; then
+  git clone https://github.com/nttlabs/nise_bosh.git /home/vagrant/nise_bosh
+fi
+
+# Run nise_bosh init script
+(
+	cd /home/vagrant/nise_bosh
+  	sudo ./bin/init
+)
+
 # Ruby
 git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
@@ -17,6 +28,11 @@ rbenv global 1.9.3-p392
 gem install bundler
 gem install bosh_cli
 rbenv rehash
+
+(
+	cd /home/vagrant/nise_bosh
+  	bundle install
+)
 
 # NFS for SDS
 sudo apt-get install nfs-kernel-server

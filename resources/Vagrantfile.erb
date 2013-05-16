@@ -10,6 +10,6 @@ Vagrant.configure("2") do |config|
   # your network.
   config.vm.network :public_network
 
-  config.vm.synced_folder "<%= nise_bosh_path %>", "/nise_bosh"
-  config.vm.synced_folder "<%= release_path %>" "/release"
+  <% if local_nise %>config.vm.synced_folder "<%= nise_path %>", "/nise_bosh"<% end %>
+  config.vm.synced_folder "<%= release_path %>", "/release"
 end

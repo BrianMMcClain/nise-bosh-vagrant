@@ -1,5 +1,6 @@
 require 'trollop'
 
+require 'nise-bosh-vagrant/initializer'
 require 'nise-bosh-vagrant/version'
 
 module NiseBOSHVagrant
@@ -23,7 +24,8 @@ EOS
 			end
 
 			opts[:release] = ARGV[0]
-			puts opts
+
+			init = NiseBOSHVagrant::Initializer.new(opts)
 		end
 
 	end

@@ -1,4 +1,5 @@
 require 'erb'
+require 'pty'
 
 module NiseBOSHVagrant
 	class Initializer
@@ -20,5 +21,27 @@ module NiseBOSHVagrant
 			File.open(output_path, "wb") { |f| f.write(vagrantfile) }
 		end
 
+		def exec(cmd)
+			begin
+				PTY.spawn (cmd) do |stdout, stdin, pid|
+					begin
+						stdout.each { |line| print line }
+					rescue Errno::EIO
+					end
+				end
+			rescue PTY::ChildExited
+			end
+		end
+
+		def start_vm(release_path=@release_path)
+			up_cmd = "cd #{release_path} ; vagrant up"
+			self.exec(up_cmd)
+			
+		end
+
+		def prepare_vm(release_path=@release_path)
+			prepare_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/scripts/prepare.sh\""
+			self.exec(prepare_cmd)
+		end
 	end
 end

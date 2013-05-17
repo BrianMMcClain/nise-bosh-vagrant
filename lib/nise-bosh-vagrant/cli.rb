@@ -31,6 +31,8 @@ EOS
 
 			init = NiseBOSHVagrant::Initializer.new(opts)
 			init.generate_vagrantfile
+			init.start_vm
+			init.prepare_vm
 		end
 
 	end

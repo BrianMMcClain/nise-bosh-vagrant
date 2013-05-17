@@ -35,6 +35,6 @@ What does that command do?
 
 Management Scripts
 ------------------
-`/home/vagrant/install.sh` -- Install your BOSH release using nise_bosh
-`/home/vagrant/start.sh` -- Start the BOSH release jobs after they've been installed
-`/home/vagrant/stop.sh` -- Stop the BOSH release jobs
+* `/home/vagrant/install.sh` -- Install your BOSH release using nise_bosh
+* `/home/vagrant/start.sh` -- Start the BOSH release jobs after they've been installed
+* `/home/vagrant/stop.sh` -- Stop the BOSH release jobs

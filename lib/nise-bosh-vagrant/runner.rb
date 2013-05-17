@@ -2,7 +2,7 @@ require 'erb'
 require 'pty'
 
 module NiseBOSHVagrant
-	class Initializer
+	class Runner
 
 		attr_reader :release_path, :nise_path, :scripts_path, :vagrantfile_path, :manifest_file
 

@@ -1,6 +1,6 @@
 require 'trollop'
 
-require 'nise-bosh-vagrant/initializer'
+require 'nise-bosh-vagrant/runner'
 require 'nise-bosh-vagrant/version'
 
 module NiseBOSHVagrant
@@ -29,10 +29,10 @@ EOS
 
 			opts[:release] = ARGV[0]
 
-			init = NiseBOSHVagrant::Initializer.new(opts)
-			init.generate_vagrantfile
-			init.start_vm
-			init.prepare_vm
+			runner = NiseBOSHVagrant::Runner.new(opts)
+			runner.generate_vagrantfile
+			runner.start_vm
+			runner.prepare_vm
 		end
 
 	end

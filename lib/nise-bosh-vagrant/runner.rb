@@ -5,7 +5,7 @@ require 'yaml'
 module NiseBOSHVagrant
 	class Runner
 
-		attr_reader :release_path, :nise_path, :scripts_path, :vagrantfile_path, :manifest_file, :manifest_copy_path, :install_script_path
+		attr_reader :release_path, :nise_path, :scripts_path, :vagrantfile_path, :manifest_file, :manifest_copy_path, :install_script_path, :manifest_copy_name, :install_script_copy_name
 
 		def initialize(opts)
 			opts[:nise].nil? ? @nise_path = nil : @nise_path = opts[:nise]
@@ -13,6 +13,10 @@ module NiseBOSHVagrant
 			@vagrantfile_path = File.join(@release_path, "Vagrantfile")
 			@scripts_path = File.join(File.dirname(File.expand_path(__FILE__)), "../../scripts")
 			@manifest_file = opts[:manifest]
+
+			@manifest_copy_name = '.nise-bosh-manifest.yml'
+			@install_script_copy_name = '.nise-bosh-install.sh'
+
 		end
 
 		def generate_vagrantfile(output_path=@vagrantfile_path)
@@ -23,7 +27,7 @@ module NiseBOSHVagrant
 		end
 
 		def copy_manifest(output_dir=@release_path, manifest_file=@manifest_file)
-			@manifest_copy_path = File.join(output_dir, '.nise-bosh-manifest.yml')
+			@manifest_copy_path = File.join(output_dir, )
 			FileUtils.cp(manifest_file, @manifest_copy_path)
 		end
 
@@ -45,7 +49,7 @@ module NiseBOSHVagrant
 
 
 			jobs.each do |job|
-				manifest_path = "/home/vagrant/release/.nise-bosh-manifest.yml"
+				manifest_path = "/home/vagrant/release/#{@manifest_copy_name}"
 				job_name = job
 				install_entry = install_script_erb.result(binding)
 				install_script += "#{install_entry}\n"
@@ -53,7 +57,7 @@ module NiseBOSHVagrant
 
 			install_script += ")"
 
-			@install_script_path = File.join(output_dir, ".nise_bosh_install.sh")
+			@install_script_path = File.join(output_dir, @install_script_copy_name)
 			File.open(@install_script_path, "wb") { |f| f.write(install_script) }
 			FileUtils.chmod 0755, @install_script_path
 		end

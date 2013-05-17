@@ -30,6 +30,13 @@ gem install bosh_cli --no-rdoc --no-ri
   	sudo PATH=$PATH bundle install 
 )
 
+# Copy install script
+cp /home/vagrant/release/.nise_bosh_install.sh /home/vagrant/install_release.sh
+chmod +x /home/vagrant/install_release.sh
+
+# Copy manifest file
+cp /home/vagrant/release/.nise-bosh-manifest.yml /home/vagrant/manifest.yml
+
 # NFS for SDS
 sudo apt-get install nfs-kernel-server
 sudo sh -c "echo '/cfsnapshot     127.0.0.1(rw,sync,no_subtree_check)' >> /etc/exports"

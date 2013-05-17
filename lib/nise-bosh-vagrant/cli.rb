@@ -31,6 +31,8 @@ EOS
 
 			runner = NiseBOSHVagrant::Runner.new(opts)
 			runner.generate_vagrantfile
+			runner.copy_manifest
+			runner.generate_install_script
 			runner.start_vm
 			runner.prepare_vm
 		end

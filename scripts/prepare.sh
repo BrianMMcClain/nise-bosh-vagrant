@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash
 
 # Git bootstrap
 sudo apt-get update
@@ -27,7 +27,7 @@ gem install bosh_cli --no-rdoc --no-ri
 
 (
 	cd /home/vagrant/nise_bosh
-  	bundle install
+  	sudo PATH=$PATH bundle install 
 )
 
 # NFS for SDS

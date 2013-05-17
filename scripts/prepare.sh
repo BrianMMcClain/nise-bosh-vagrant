@@ -15,19 +15,15 @@ fi
   	sudo ./bin/init
 )
 
-# Ruby
-git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-. ~/.bash_profile
-git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-rbenv install 1.9.3-p392
-rbenv global 1.9.3-p392
+curl -L https://get.rvm.io | bash -s stable
+echo -e "\nsource /home/vagrant/.rvm/scripts/rvm" >> /home/vagrant/.profile
+source /home/vagrant/.rvm/scripts/rvm
+rvm install 1.9.3-p392
+rvm use --default 1.9.3-p392
 
 # BOSH CLI
-gem install bundler
-gem install bosh_cli
-rbenv rehash
+gem install bundler --no-rdoc --no-ri
+gem install bosh_cli --no-rdoc --no-ri
 
 (
 	cd /home/vagrant/nise_bosh

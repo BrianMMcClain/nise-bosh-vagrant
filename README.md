@@ -22,7 +22,7 @@ This will generate a Vagrantfile, spin up a VM, and use nise_bosh to deploy your
 ```
 $ cd </path/to/release>
 $ vagrant ssh
-$ ./install.sh
+$ ./install_release.sh
 $ ./start.sh
 ```
 
@@ -35,6 +35,6 @@ What does that command do?
 
 Management Scripts
 ------------------
-* `/home/vagrant/install.sh` -- Install your BOSH release using nise_bosh
+* `/home/vagrant/install_release.sh` -- Install your BOSH release using nise_bosh
 * `/home/vagrant/start.sh` -- Start the BOSH release jobs after they've been installed
 * `/home/vagrant/stop.sh` -- Stop the BOSH release jobs

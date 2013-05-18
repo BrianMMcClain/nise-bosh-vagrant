@@ -31,7 +31,7 @@ gem install bosh_cli --no-rdoc --no-ri
 )
 
 # Copy install script
-cp /home/vagrant/release/.nise_bosh_install.sh /home/vagrant/install_release.sh
+cp /home/vagrant/release/.nise-bosh-install.sh /home/vagrant/install_release.sh
 chmod +x /home/vagrant/install_release.sh
 
 # Copy manifest file

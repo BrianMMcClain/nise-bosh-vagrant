@@ -27,7 +27,7 @@ module NiseBOSHVagrant
 		end
 
 		def copy_manifest(output_dir=@release_path, manifest_file=@manifest_file)
-			@manifest_copy_path = File.join(output_dir, )
+			@manifest_copy_path = File.join(output_dir, @manifest_copy_name)
 			FileUtils.cp(manifest_file, @manifest_copy_path)
 		end
 

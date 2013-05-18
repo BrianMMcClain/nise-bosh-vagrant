@@ -1,1 +1,1 @@
-sudo PATH=$PATH bundle exec ./bin/nise-bosh -y /home/vagrant/release <%= manifest_path %> <%= job_name %>
+sudo PATH=$PATH bundle exec ./bin/nise-bosh --keep-monit-files -y /home/vagrant/release <%= manifest_path %> <%= job_name %>

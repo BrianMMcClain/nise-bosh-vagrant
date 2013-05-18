@@ -44,9 +44,3 @@ chmod +x /home/vagrant/start.sh
 
 # Copy manifest file
 cp /home/vagrant/release/.nise-bosh-manifest.yml /home/vagrant/manifest.yml
-
-# If we're in a VirtualBox vm, rebuild the guest additions to prevent failure of mounting shared folders
-if [ -f "/etc/init.d/vboxadd" ];
-then
-	sudo /etc/init.d/vboxadd setup
-fi

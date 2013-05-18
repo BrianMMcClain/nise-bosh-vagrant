@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Git bootstrap
+# Install git
 sudo apt-get update
 sudo apt-get install -y git-core
 
@@ -15,16 +15,18 @@ fi
   	sudo ./bin/init
 )
 
+# Install ruby 1.9.3-p392
 curl -L https://get.rvm.io | bash -s stable
 echo -e "\nsource /home/vagrant/.rvm/scripts/rvm" >> /home/vagrant/.profile
 source /home/vagrant/.rvm/scripts/rvm
 rvm install 1.9.3-p392
 rvm use --default 1.9.3-p392
 
-# BOSH CLI
+# Install BOSH CLI
 gem install bundler --no-rdoc --no-ri
 gem install bosh_cli --no-rdoc --no-ri
 
+# Bundle nise-bosh gems
 (
 	cd /home/vagrant/nise_bosh
   	sudo PATH=$PATH bundle install 
@@ -37,8 +39,8 @@ chmod +x /home/vagrant/install_release.sh
 # Copy manifest file
 cp /home/vagrant/release/.nise-bosh-manifest.yml /home/vagrant/manifest.yml
 
-# NFS for SDS
-sudo apt-get install nfs-kernel-server
-sudo sh -c "echo '/cfsnapshot     127.0.0.1(rw,sync,no_subtree_check)' >> /etc/exports"
-sudo mkdir /cfsnapshot
-sudo /etc/init.d/nfs-kernel-server restart
+# If we're in a VirtualBox vm, rebuild the guest additions to prevent failure of mounting shared folders
+if [ -f "/etc/init.d/vboxadd" ];
+then
+	sudo /etc/init.d/vboxadd setup
+fi

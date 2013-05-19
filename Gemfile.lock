@@ -1,10 +1,12 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    rake (10.0.4)
     trollop (2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  rake (= 10.0.4)
   trollop (= 2.0)

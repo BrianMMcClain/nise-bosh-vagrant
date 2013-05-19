@@ -10,6 +10,9 @@ Requirements
 - A BOSH release to run
 - A custom manifest file
 
+Installation
+------------
+`gem install nise-bosh-vagrant`
 
 Usage
 -----

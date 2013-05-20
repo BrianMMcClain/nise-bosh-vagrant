@@ -1,6 +1,7 @@
 require 'erb'
 require 'pty'
 require 'yaml'
+require 'fileutils'
 
 module NiseBOSHVagrant
 	class Runner

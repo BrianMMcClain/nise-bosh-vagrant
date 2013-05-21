@@ -85,5 +85,15 @@ module NiseBOSHVagrant
 			prepare_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/scripts/prepare.sh\""
 			self.exec(prepare_cmd)
 		end
+
+		def install_release(release_path=@release_path)
+			install_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/install_release.sh\""
+			self.exec(install_cmd)
+		end
+
+		def start_release(release_path=@release_path)
+			start_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/start.sh\""
+			self.exec(start_cmd)
+		end
 	end
 end

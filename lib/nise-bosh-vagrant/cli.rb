@@ -24,6 +24,7 @@ EOS
 				opt :nise, "Path to nise-bosh if you don't wish to pull HEAD of master from GitHub", :type => :string
 				opt :install, "Run install script after preparing the VM"
 				opt :start, "Start all jobs after installing them (implies --install)"
+				opt :memory, "Amount of memory to allocate to the VM in MB", :type => :integer, :default => 512
 			end
 
 			Trollop::die :manifest, "must provide a manifest file" if opts[:manifest].nil?

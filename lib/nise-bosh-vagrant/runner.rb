@@ -6,7 +6,8 @@ require 'fileutils'
 module NiseBOSHVagrant
 	class Runner
 
-		attr_reader :release_path, :nise_path, :scripts_path, :vagrantfile_path, :manifest_file, :manifest_copy_path, :install_script_path, :manifest_copy_name, :install_script_copy_name
+		attr_reader :release_path, :nise_path, :scripts_path, :vagrantfile_path, :manifest_file, :manifest_copy_path, :install_script_path, 
+					:manifest_copy_name, :install_script_copy_name, :memory
 
 		def initialize(opts)
 			opts[:nise].nil? ? @nise_path = nil : @nise_path = opts[:nise]
@@ -14,6 +15,7 @@ module NiseBOSHVagrant
 			@vagrantfile_path = File.join(@release_path, "Vagrantfile")
 			@scripts_path = File.join(File.dirname(File.expand_path(__FILE__)), "../../scripts")
 			@manifest_file = opts[:manifest]
+			@memory = opts[:memory]
 
 			@manifest_copy_name = '.nise-bosh-manifest.yml'
 			@install_script_copy_name = '.nise-bosh-install.sh'

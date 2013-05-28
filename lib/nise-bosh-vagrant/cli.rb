@@ -27,6 +27,7 @@ EOS
 				opt :memory, "Amount of memory to allocate to the VM in MB", :type => :integer, :default => 512
 				opt :preinstall, "Preinstall hook script", :type => :string
 				opt :postinstall, "Postinstall hook script", :type => :string
+				opt :address, "IP address for the VM", :type => :string, :default => "192.168.10.10"
 			end
 
 			Trollop::die :manifest, "must provide a manifest file" if opts[:manifest].nil?

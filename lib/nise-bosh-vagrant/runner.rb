@@ -18,6 +18,7 @@ module NiseBOSHVagrant
 			@preinstall_file = opts[:preinstall]
 			@postinstall_file = opts[:postinstall]
 			@memory = opts[:memory]
+			@ip_address = opts[:address]
 
 			copy_file_prefix = '.nise-bosh'
 			@copy_name = {

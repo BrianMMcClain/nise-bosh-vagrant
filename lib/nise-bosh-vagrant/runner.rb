@@ -16,6 +16,7 @@ module NiseBOSHVagrant
 			@scripts_path = File.join(File.dirname(File.expand_path(__FILE__)), "../../scripts")
 			@manifest_file = opts[:manifest]
 			@memory = opts[:memory]
+			@ip_address = opts[:address]
 
 			@manifest_copy_name = '.nise-bosh-manifest.yml'
 			@install_script_copy_name = '.nise-bosh-install.sh'

@@ -25,10 +25,14 @@ EOS
 				opt :install, "Run install script after preparing the VM"
 				opt :start, "Start all jobs after installing them (implies --install)"
 				opt :memory, "Amount of memory to allocate to the VM in MB", :type => :integer, :default => 512
+				opt :preinstall, "Preinstall hook script", :type => :string
+				opt :postinstall, "Postinstall hook script", :type => :string
 			end
 
 			Trollop::die :manifest, "must provide a manifest file" if opts[:manifest].nil?
 			Trollop::die :manifest, "must exist" unless File.exist?(opts[:manifest])
+			Trollop::die :preinstall, "must exist" unless opts[:preinstall].nil? || File.exist?(opts[:preinstall])
+			Trollop::die :postinstall, "must exist" unless opts[:postinstall].nil? || File.exist?(opts[:postinstall])
 
 			opts[:release] = ARGV[0]
 
@@ -40,6 +44,7 @@ EOS
 			runner = NiseBOSHVagrant::Runner.new(opts)
 			runner.generate_vagrantfile
 			runner.copy_manifest
+			runner.copy_hook_scripts
 			runner.generate_install_script
 			puts "---> Starting Vagrant VM"
 			runner.start_vm
@@ -48,8 +53,10 @@ EOS
 
 			# If instructed, install the release
 			if opts[:install]
+				runner.hook_preinstall_release
 				puts "---> Installing release"
 				runner.install_release
+				runner.hook_postinstall_release
 			end
 
 			# If instructed, start the release

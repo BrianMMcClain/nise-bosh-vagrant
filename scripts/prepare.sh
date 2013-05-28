@@ -42,5 +42,14 @@ chmod +x /home/vagrant/start.sh
 cp /home/vagrant/scripts/stop.sh /home/vagrant/stop.sh
 chmod +x /home/vagrant/start.sh
 
+# Copy hook scripts
+for hook in preinstall postinstall; do
+echo ${hook}
+	if [ -f /home/vagrant/release/.nise-bosh-${hook} ]; then
+		cp /home/vagrant/release/.nise-bosh-${hook} /home/vagrant/${hook}_release
+		chmod +x /home/vagrant/${hook}_release
+	fi
+done
+
 # Copy manifest file
 cp /home/vagrant/release/.nise-bosh-manifest.yml /home/vagrant/manifest.yml

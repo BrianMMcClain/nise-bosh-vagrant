@@ -43,13 +43,17 @@ module NiseBOSHVagrant
 		end
 
 		def copy_hook_scripts(output_dir=@release_path, preinstall_file=@preinstall_file, postinstall_file=@postinstall_file)
+			@preinstall_copy_path = File.join(output_dir, @copy_name[:preinstall])
 			if preinstall_file
-				@preinstall_copy_path = File.join(output_dir, @copy_name[:preinstall])
 				FileUtils.cp(preinstall_file, @preinstall_copy_path)
+			else
+				FileUtils.rm(@preinstall_copy_path)
 			end
+			@postinstall_copy_path = File.join(output_dir, @copy_name[:postinstall])
 			if postinstall_file
-				@postinstall_copy_path = File.join(output_dir, @copy_name[:postinstall])
 				FileUtils.cp(postinstall_file, @postinstall_copy_path)
+			else
+				FileUtils.rm(@postinstall_copy_path)
 			end
 		end
 
@@ -112,12 +116,12 @@ module NiseBOSHVagrant
 			self.exec(install_cmd)
 		end
 
-		def hook_preinstall_release(release_path=@release_path)
+		def run_preinstall_release(release_path=@release_path)
 			hook_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/preinstall_release\""
 			self.exec(hook_cmd)
 		end
 
-		def hook_postinstall_release(release_path=@release_path)
+		def run_postinstall_release(release_path=@release_path)
 			hook_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/postinstall_release\""
 			self.exec(hook_cmd)
 		end

@@ -54,10 +54,16 @@ EOS
 
 			# If instructed, install the release
 			if opts[:install]
-				runner.hook_preinstall_release
+				if opts[:preinstall]
+					puts "---> Running preinstall script"
+					runner.run_preinstall_release
+				end
 				puts "---> Installing release"
 				runner.install_release
-				runner.hook_postinstall_release
+				if opts[:postinstall]
+					puts "---> Running postinstall script"
+					runner.run_postinstall_release
+				end
 			end
 
 			# If instructed, start the release

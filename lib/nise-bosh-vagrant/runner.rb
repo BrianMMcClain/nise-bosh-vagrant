@@ -10,7 +10,7 @@ module NiseBOSHVagrant
 					:copy_name, :memory
 
 		def initialize(opts)
-			opts[:nise].nil? ? @nise_path = nil : @nise_path = opts[:nise]
+			opts[:nise].nil? ? @nise_path = nil : @nise_path = File.expand_path(opts[:nise])
 			@release_path = opts[:release]
 			@vagrantfile_path = File.join(@release_path, "Vagrantfile")
 			@scripts_path = File.join(File.dirname(File.expand_path(__FILE__)), "../../scripts")

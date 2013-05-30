@@ -47,13 +47,13 @@ module NiseBOSHVagrant
 			if preinstall_file
 				FileUtils.cp(preinstall_file, @preinstall_copy_path)
 			else
-				FileUtils.rm(@preinstall_copy_path)
+				FileUtils.rm_rf(@preinstall_copy_path)
 			end
 			@postinstall_copy_path = File.join(output_dir, @copy_name[:postinstall])
 			if postinstall_file
 				FileUtils.cp(postinstall_file, @postinstall_copy_path)
 			else
-				FileUtils.rm(@postinstall_copy_path)
+				FileUtils.rm_rf(@postinstall_copy_path)
 			end
 		end
 

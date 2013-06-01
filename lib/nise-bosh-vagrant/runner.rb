@@ -19,6 +19,7 @@ module NiseBOSHVagrant
 			@postinstall_file = opts[:postinstall]
 			@memory = opts[:memory]
 			@ip_address = opts[:address]
+			@bridge = opts[:bridge]
 
 			copy_file_prefix = '.nise-bosh'
 			@copy_name = {
@@ -28,6 +29,10 @@ module NiseBOSHVagrant
 				:install_script => "#{copy_file_prefix}-install.sh",
 			}
 
+			if @bridge
+				@bridge_if = NetworkInterface.find(@ip_address)
+				raise "No available interface found" if @bridge_if.nil?
+			end
 		end
 
 		def generate_vagrantfile(output_path=@vagrantfile_path)

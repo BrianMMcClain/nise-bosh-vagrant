@@ -9,7 +9,12 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--memory", "<%= @memory %>"]
   end
 
+<% if @bridge %>
+  config.vm.network :public_network, :bridge => "<%= @bridge_if.vbox_name %>"
+  config.vm.provision :shell, :path => "<%= File.expand_path("../scripts/bridge_interface.sh", __FILE__) %>", :args =>  "<%= @ip_address %> <%= @bridge_if.network_mask %> <%= @bridge_if.gateway %>"
+<% else %>
   config.vm.network :private_network, ip: "<%= @ip_address %>"
+<% end %>
 
   <% if not @nise_path.nil? %>config.vm.synced_folder "<%= @nise_path %>", "/home/vagrant/nise_bosh"<% end %>
   config.vm.synced_folder "./", "/home/vagrant/release"

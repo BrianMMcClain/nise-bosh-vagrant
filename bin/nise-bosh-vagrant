@@ -2,6 +2,6 @@
 $:.push File.dirname(__FILE__) + '/../lib'
 
 require "rubygems"
-require "nise-bosh-vagrant/cli"
+require "nise-bosh-vagrant"
 
 NiseBOSHVagrant::CLI.start

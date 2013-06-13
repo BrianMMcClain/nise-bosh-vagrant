@@ -13,7 +13,7 @@ module NiseBOSHVagrant
         if match = ifconfig.match(/inet ([.0-9]+) netmask 0x([0-9a-f]+) broadcast/) # BSD
           address = match[1]
           mask = match[2].unpack("a2a2a2a2").map { |block| block.hex }.join(".")
-          gateway = `route -n get -ifscope #{kernel_device_name} 0.0.0.0 | grep gateway | awk '{print $2}'`.strip
+          gateway = `route -n get -ifscope #{kernel_device_name} 0.0.0.0 2>&1 | grep gateway | awk '{print $2}'`.strip
         elsif match = ifconfig.match(/inet addr:([.0-9]+)  Bcast:[.0-9]+  Mask:([.0-9]+)/) # Linux
           address = match[1]
           mask = match[2]

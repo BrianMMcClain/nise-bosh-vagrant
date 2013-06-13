@@ -36,6 +36,8 @@ module NiseBOSHVagrant
 		end
 
 		def generate_vagrantfile(output_path=@vagrantfile_path)
+			bridge_script_file = File.expand_path("../../../scripts/bridge_interface.sh", __FILE__)
+
 			vagrantfile_template = File.open(File.join(File.dirname(File.expand_path(__FILE__)), '../../resources/Vagrantfile.erb'), "rb") { |f| f.read }
 			template = ERB.new vagrantfile_template
 			vagrantfile = template.result(binding)

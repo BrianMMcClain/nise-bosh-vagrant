@@ -21,12 +21,16 @@ module NiseBOSHVagrant
 			@ip_address = opts[:address]
 			@bridge = opts[:bridge]
 
-			copy_file_prefix = '.nise-bosh'
+			copy_file_dir_name = ".nise-bosh"
+			copy_file_prefix = 'nise-bosh'
+			if not File.directory? File.join(@release_path, copy_file_dir_name)
+				FileUtils.mkdir(File.join(@release_path, copy_file_dir_name))
+			end
 			@copy_name = {
-				:manifest       => "#{copy_file_prefix}-manifest.yml",
-				:preinstall     => "#{copy_file_prefix}-preinstall",
-				:postinstall    => "#{copy_file_prefix}-postinstall",
-				:install_script => "#{copy_file_prefix}-install.sh",
+				:manifest       => "#{copy_file_dir_name}/#{copy_file_prefix}-manifest.yml",
+				:preinstall     => "#{copy_file_dir_name}/#{copy_file_prefix}-preinstall",
+				:postinstall    => "#{copy_file_dir_name}/#{copy_file_prefix}-postinstall",
+				:install_script => "#{copy_file_dir_name}/#{copy_file_prefix}-install.sh",
 			}
 
 			if @bridge
@@ -119,17 +123,21 @@ module NiseBOSHVagrant
 		end
 
 		def install_release(release_path=@release_path)
-			install_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/install_release.sh\""
+			install_script_path = "/home/vagrant/release/#{@copy_name[:install_script]}"
+			install_cmd = "cd #{release_path} ; vagrant ssh -c \"" + install_script_path + "\""
+			puts "Executing #{install_cmd}"
 			self.exec(install_cmd)
 		end
 
 		def run_preinstall_release(release_path=@release_path)
-			hook_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/preinstall_release\""
+			script_path = "/home/vagrant/release/#{@copy_name[:preinstall]}"
+			hook_cmd = "cd #{release_path} ; vagrant ssh -c \"" + script_path + "\""
 			self.exec(hook_cmd)
 		end
 
 		def run_postinstall_release(release_path=@release_path)
-			hook_cmd = "cd #{release_path} ; vagrant ssh -c \"/home/vagrant/postinstall_release\""
+			script_path = "/home/vagrant/release/#{@copy_name[:preinstall]}"
+			hook_cmd = "cd #{release_path} ; vagrant ssh -c \"" + script_path + "\""
 			self.exec(hook_cmd)
 		end
 

@@ -15,12 +15,12 @@ fi
   	sudo ./bin/init
 )
 
-# Install ruby 1.9.3-p392
+# Install ruby 1.9.3-p448
 curl -L https://get.rvm.io | bash -s stable
 echo -e "\nsource /home/vagrant/.rvm/scripts/rvm" >> /home/vagrant/.profile
 source /home/vagrant/.rvm/scripts/rvm
-rvm install 1.9.3-p392
-rvm use --default 1.9.3-p392
+rvm install 1.9.3-p448
+rvm use --default 1.9.3-p448
 
 # Install BOSH CLI
 gem install bundler --no-rdoc --no-ri
